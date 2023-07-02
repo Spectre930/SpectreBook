@@ -3,20 +3,18 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SpectreBookWeb.Data;
+using SpectreBook.DataAccess;
+
 
 #nullable disable
 
 namespace SpectreBookWeb.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20230616225343_AddCategoryToDatabase")]
-    partial class AddCategoryToDatabase
+    partial class AppDBContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

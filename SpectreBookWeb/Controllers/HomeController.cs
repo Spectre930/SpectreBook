@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SpectreBookWeb.Models;
+using SpectreBook.Models;
 using System.Diagnostics;
 
 namespace SpectreBookWeb.Controllers

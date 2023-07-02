@@ -1,4 +1,4 @@
-namespace SpectreBookWeb.Models
+namespace SpectreBook.Models
 {
     public class ErrorViewModel
     {
