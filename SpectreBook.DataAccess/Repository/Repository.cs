@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using SpectreBook.DataAccess.Repository.IRepository;
 using System;
 using System.Collections.Generic;
@@ -12,47 +13,41 @@ namespace SpectreBook.DataAccess.Repository
     public class Repository<T> : IRepository<T> where T : class
     {
 
-        void Add(T entity)
+        private readonly AppDBContext _db;
+        internal DbSet<T> dbSet;
+        public Repository(AppDBContext db)
         {
-            throw new NotImplementedException();
+            _db = db;
+            this.dbSet = _db.Set<T>();
         }
-
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
-
-        }
-
-        void Remove(T entity)
-        {
-            throw new NotImplementedException();
-
-        }
-
-        void RemoveRange(T entity)
-        {
-            throw new NotImplementedException();
+            IQueryable<T> query = dbSet;
+            return query.ToList();
 
         }
 
         public T GetFirstOrDefault(Expression<Func<T, bool>> filter)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = dbSet;
+            query = query.Where(filter);
+            return query.FirstOrDefault();
+
         }
 
         void IRepository<T>.Add(T entity)
         {
-            throw new NotImplementedException();
+            dbSet.Add(entity);
         }
 
         void IRepository<T>.Remove(T entity)
         {
-            throw new NotImplementedException();
+            dbSet.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<T> entity)
         {
-            throw new NotImplementedException();
+            dbSet.RemoveRange(entity);
         }
     }
 }

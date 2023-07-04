@@ -1,20 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SpectreBook.DataAccess;
+using SpectreBook.DataAccess.Repository.IRepository;
 using SpectreBook.Models;
-namespace SpectreBookWeb.Controllers
+
+namespace SpectreBookWeb.Areas.Admin.Controllers
 {
 
     public class CategoryController : Controller
     {
-        private readonly AppDBContext _db;
+        private readonly IUnitOfWork _UnitOfWork;
 
-        public CategoryController(AppDBContext db)
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _UnitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            IEnumerable<Category> objCategoryList = _db.Categories;
+            IEnumerable<Category> objCategoryList = _UnitOfWork.Category.GetAll();
             return View(objCategoryList);
         }
 
@@ -36,8 +38,8 @@ namespace SpectreBookWeb.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+                _UnitOfWork.Category.Add(obj);
+                _UnitOfWork.Save();
                 TempData["success"] = "Category Created Successfully";
                 return RedirectToAction("Index");
             }
@@ -52,7 +54,7 @@ namespace SpectreBookWeb.Controllers
                 return NotFound();
             }
 
-            var categoryFromDb = _db.Categories.FirstOrDefault(u=>u.Id == id);
+            var categoryFromDb = _UnitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -73,8 +75,8 @@ namespace SpectreBookWeb.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                _UnitOfWork.Category.Update(obj);
+                _UnitOfWork.Save();
                 TempData["success"] = "Category Updated Successfully";
                 return RedirectToAction("Index");
             }
@@ -89,7 +91,7 @@ namespace SpectreBookWeb.Controllers
                 return NotFound();
             }
 
-            var categoryFromDb = _db.Categories.Find(id);
+            var categoryFromDb = _UnitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -104,15 +106,15 @@ namespace SpectreBookWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePOST(int? id)
         {
-            var obj = _db.Categories.Find(id);
+            var obj = _UnitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
 
             if (obj == null)
             {
                 return NotFound();
             }
 
-            _db.Categories.Remove(obj);
-            _db.SaveChanges();
+            _UnitOfWork.Category.Remove(obj);
+            _UnitOfWork.Save();
             TempData["success"] = "Category Deleted Successfully";
             return RedirectToAction("Index");
 

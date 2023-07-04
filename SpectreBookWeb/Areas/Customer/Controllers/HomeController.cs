@@ -2,7 +2,7 @@
 using SpectreBook.Models;
 using System.Diagnostics;
 
-namespace SpectreBookWeb.Controllers
+namespace SpectreBookWeb.Areas.Customer.Controllers
 {
     public class HomeController : Controller
     {
