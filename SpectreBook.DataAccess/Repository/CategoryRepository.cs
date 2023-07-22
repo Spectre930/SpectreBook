@@ -11,7 +11,7 @@ namespace SpectreBook.DataAccess.Repository
 {
     public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
-        private AppDBContext _db;
+        private readonly AppDBContext _db;
         public CategoryRepository(AppDBContext db) : base(db)
         {
             _db = db;

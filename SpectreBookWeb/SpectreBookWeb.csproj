@@ -21,4 +21,8 @@
     <ProjectReference Include="..\SpectreBook.DataAccess\SpectreBook.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\products\" />
+  </ItemGroup>
+
 </Project>
