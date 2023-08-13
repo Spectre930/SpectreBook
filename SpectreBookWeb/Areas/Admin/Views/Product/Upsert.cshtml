@@ -1,8 +1,11 @@
 ﻿@model SpectreBook.Models.ViewModels.ProductVM
 
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+        <input asp-for="Product.Id" hidden/>
+        <div class="row">
+          <div class="col-10">
     <div class="border p-3 mt-4 row">
-        <div class="row pb-2">
+        <div class="col-12 pb-2">
             <h2 class="text-primary">@(Model.Product.Id!=0?"Update" : "Create") Product</h2>
             <hr />
         </div>
@@ -28,28 +31,28 @@
             <span asp-validation-for="Product.Author" class="text-danger"></span>
         </div>
         <div class="mb-3 col-6">
-            <label asp-for="Product.ListPrice"></label>
+            <label asp-for="Product.ListPrice">List Price</label>
             <input asp-for="Product.ListPrice" class="form-control" />
             <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
         </div>
         <div class="mb-3 col-6">
-            <label asp-for="Product.Price"></label>
+            <label asp-for="Product.Price">Price for 1 - 50</label>
             <input asp-for="Product.Price" class="form-control" />
             <span asp-validation-for="Product.Price" class="text-danger"></span>
         </div>
         <div class="mb-3 col-6">
-            <label asp-for="Product.Price50"></label>
+            <label asp-for="Product.Price50">Price for 51 - 100</label>
             <input asp-for="Product.Price50" class="form-control" />
             <span asp-validation-for="Product.Price50" class="text-danger"></span>
         </div>
         <div class="mb-3 col-6">
-            <label asp-for="Product.Price100"></label>
+            <label asp-for="Product.Price100">Price for 100+</label>
             <input asp-for="Product.Price100" class="form-control" />
             <span asp-validation-for="Product.Price100" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Product.ImageUrl"></label>
-            <input type="file" id="uploadBox" name="file" asp-for="Product.ImageUrl" class="form-control" />
+            <input type="file" id="uploadBox" name="file" class="form-control" />
         </div>
         <div class="mb-3 col-6">
             <label asp-for="Product.CategoryId">Category</label>
@@ -81,12 +84,33 @@
         </a>
         </div>
     </div>
+
+            </div>
+            <div class="col-2 pt-4">
+                <img src="@Model.Product.ImageUrl" width="100%" style="border-radius:5px; border: 1px solid #bbb9b9" />
+            </div>
+
+        </div>
 </form>
 
 @section Scripts {
     @{
         <partial Product.Title="_ValidationScriptsPartial" />
     }
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link  mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant"))
+        });
+    </script>
     <script>
         function ValidateInput() {
            

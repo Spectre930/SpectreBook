@@ -20,17 +20,31 @@ namespace SpectreBook.DataAccess.Repository
             _db = db;
             this.dbSet = _db.Set<T>();
         }
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includes = null)
         {
             IQueryable<T> query = dbSet;
+            if (includes != null)
+            {
+                foreach (var inc in includes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(inc);
+                }
+            }
             return query.ToList();
 
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> filter)
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter, string? includes = null)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
+            if (includes != null)
+            {
+                foreach (var inc in includes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(inc);
+                }
+            }
             return query.FirstOrDefault();
 
         }

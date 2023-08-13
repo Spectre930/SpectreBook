@@ -4,12 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpectreBookWeb", "SpectreBookWeb\SpectreBookWeb.csproj", "{6CF5FF9A-0379-45FA-B231-3EEEC7AD8CF1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{752F8286-5116-4AF1-A464-7E51B416F979} = {752F8286-5116-4AF1-A464-7E51B416F979}
+		{B1D6A88E-AB3E-47D0-AD84-3B6D29B466D9} = {B1D6A88E-AB3E-47D0-AD84-3B6D29B466D9}
+		{FBA8B91C-2BEB-4C4C-87D8-80FAA9E743E4} = {FBA8B91C-2BEB-4C4C-87D8-80FAA9E743E4}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectreBook.DataAccess", "SpectreBook.DataAccess\SpectreBook.DataAccess.csproj", "{752F8286-5116-4AF1-A464-7E51B416F979}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpectreBook.DataAccess", "SpectreBook.DataAccess\SpectreBook.DataAccess.csproj", "{752F8286-5116-4AF1-A464-7E51B416F979}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectreBook.Models", "SpectreBook.Models\SpectreBook.Models.csproj", "{FBA8B91C-2BEB-4C4C-87D8-80FAA9E743E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpectreBook.Models", "SpectreBook.Models\SpectreBook.Models.csproj", "{FBA8B91C-2BEB-4C4C-87D8-80FAA9E743E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpectreBook.Utility", "SpectreBook.Utility\SpectreBook.Utility.csproj", "{B1D6A88E-AB3E-47D0-AD84-3B6D29B466D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpectreBook.Utility", "SpectreBook.Utility\SpectreBook.Utility.csproj", "{B1D6A88E-AB3E-47D0-AD84-3B6D29B466D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

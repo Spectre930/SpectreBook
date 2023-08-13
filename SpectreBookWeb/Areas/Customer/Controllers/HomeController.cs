@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SpectreBook.DataAccess.Repository.IRepository;
 using SpectreBook.Models;
+using SpectreBook.Models.ViewModels;
 using System.Diagnostics;
 
 namespace SpectreBookWeb.Areas.Customer.Controllers
@@ -7,15 +9,33 @@ namespace SpectreBookWeb.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+
+            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includes: "Category,CoverType");
+            return View(productList);
+        }
+
+        public IActionResult Details(int id)
+        {
+
+            Product product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id, includes: "Category,CoverType");
+
+            ShoppingCart cart = new()
+            {
+                product = product,
+                Count = 1
+
+            };
+            return View(cart);
         }
 
         public IActionResult Privacy()
