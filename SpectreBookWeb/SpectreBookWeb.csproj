@@ -21,6 +21,7 @@
 
    <ItemGroup>
     <ProjectReference Include="..\SpectreBook.DataAccess\SpectreBook.DataAccess.csproj" />
+    <ProjectReference Include="..\SpectreBook.Utility\SpectreBook.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>
